@@ -14,4 +14,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  
+
+logging:
+  level:
+    ROOT: INFO
+    com.parsa.erp.accounting: INFO
+  file:
+    path: /home/software/student_management/logs
