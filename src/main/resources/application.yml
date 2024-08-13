@@ -1,0 +1,17 @@
+server:
+  port: 8025
+  
+spring:
+  application:
+    name: student_management
+  datasource:
+    url: jdbc:postgresql://localhost:5432/student_management?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  
