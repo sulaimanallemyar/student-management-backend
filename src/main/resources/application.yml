@@ -5,9 +5,9 @@ spring:
   application:
     name: student_management
   datasource:
-    url: jdbc:postgresql://localhost:5432/student_management?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
-    username: root
-    password: 
+    url: jdbc:postgresql://localhost:5432/student_management?useUnicode=true&characterEncoding=utf8
+    username: postgres
+    password: soft@123!@#
   jpa:
     hibernate:
       ddl-auto: update
