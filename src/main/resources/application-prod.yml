@@ -7,10 +7,10 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/student_management?useUnicode=true&characterEncoding=utf8
     username: postgres
-    password: postgres
+    password: soft@123!@#
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -20,4 +20,4 @@ logging:
     ROOT: INFO
     com.parsa.erp.accounting: INFO
   file:
-    path: logs
+    path: /home/software/student_management/logs

@@ -1,11 +1,11 @@
 server:
   port: 8025
-  
+
 spring:
   application:
     name: student_management
   datasource:
-    url: jdbc:postgresql://localhost:5432/student_management?useUnicode=true&characterEncoding=utf8
+    url: jdbc:postgresql://localhost:5432/student_management_test?useUnicode=true&characterEncoding=utf8
     username: postgres
     password: postgres
   jpa:
