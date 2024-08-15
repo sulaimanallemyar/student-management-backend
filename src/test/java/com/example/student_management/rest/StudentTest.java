@@ -32,7 +32,6 @@ import com.example.student_management.service.dto.StudentDTO;
 import com.example.student_management.web.rest.TestUtil;
 
 import jakarta.persistence.EntityManager;
-import lombok.extern.slf4j.Slf4j;
 
 import com.example.student_management.domain.Student;
 
@@ -41,7 +40,6 @@ import com.example.student_management.domain.Student;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WithMockUser
-@Slf4j
 public class StudentTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
@@ -100,10 +98,10 @@ public class StudentTest {
         restStudentMockMvc
                 .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(studentDto)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
         // Validate the student in the database
-        List<Student> studentList = studentRepository.findAllByOrderByIdAsc();
+        List<Student> studentList = studentRepository.findAll();
         assertThat(studentList).hasSize(databaseSizeBeforeCreate + 1);
 
         Student testStudent = studentList.get(studentList.size() - 1);
@@ -181,7 +179,7 @@ public class StudentTest {
                 .andExpect(status().isOk());
 
         // Validate the list in the database
-        List<Student> list = studentRepository.findAllByOrderByIdAsc();
+        List<Student> list = studentRepository.findAll();
         assertThat(list).hasSize(databaseSizeBeforeUpdate);
         Student testStudent = list.get(list.size() - 1);
 
