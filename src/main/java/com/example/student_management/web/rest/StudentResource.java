@@ -1,13 +1,11 @@
 package com.example.student_management.web.rest;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import jakarta.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,15 +40,11 @@ public class StudentResource {
 	}
 
 	@GetMapping("/students")
-	public ResponseEntity<List<StudentDTO>> getStudents(Pageable pageable) {
+	public ResponseEntity<Page<StudentDTO>> getStudents(Pageable pageable) {
 		log.info("REST request to get students");
 
 		Page<StudentDTO> page = studentService.findAll(pageable);
-		List<StudentDTO> result = page.stream().collect(Collectors.toList());
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("X-Total-Count", String.valueOf(page.getTotalElements()));
-
-		return ResponseEntity.ok().headers(headers).body(result);
+		return ResponseEntity.ok().body(page);
 	}
 
 	@GetMapping("/students/{id}")

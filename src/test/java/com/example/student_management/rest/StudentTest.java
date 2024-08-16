@@ -112,17 +112,18 @@ public class StudentTest {
     @Test
     @Transactional
     void getAllStudents() throws Exception {
+
         // Initialize the database
         studentRepository.saveAndFlush(student);
 
         // Get all the studentList
         restStudentMockMvc
-                .perform(get(ENTITY_API_URL))
+                .perform(get(ENTITY_API_URL).param("sort", "id,desc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(student.getId().intValue())))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-                .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME)));
+                .andExpect(jsonPath("$.content.[*].id").value(hasItem(student.getId().intValue())))
+                .andExpect(jsonPath("$.content.[*].name").value(hasItem(DEFAULT_NAME)))
+                .andExpect(jsonPath("$.content.[*].surname").value(hasItem(DEFAULT_SURNAME)));
     }
 
     @Test

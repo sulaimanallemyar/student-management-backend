@@ -14,17 +14,15 @@ import com.example.student_management.repository.StudentRepository;
 import com.example.student_management.service.StudentService;
 import com.example.student_management.service.dto.StudentDTO;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
 	private final StudentRepository studentRepository;
 
 	private final ModelMapper modelMapper;
-
-	public StudentServiceImpl(StudentRepository studentRepository, ModelMapper modelMapper) {
-		this.studentRepository = studentRepository;
-		this.modelMapper = modelMapper;
-	}
 
 	@Override
 	public StudentDTO save(StudentDTO studentDto) {
@@ -44,7 +42,7 @@ public class StudentServiceImpl implements StudentService {
 		Page<Student> page = studentRepository.findAll(pageable);
 		List<StudentDTO> list = page.stream().map(obj -> modelMapper.map(obj, StudentDTO.class))
 				.collect(Collectors.toList());
-		Page<StudentDTO> pageDto = new PageImpl<>(list);
+		Page<StudentDTO> pageDto = new PageImpl<>(list, page.getPageable(), page.getTotalElements());
 
 		return pageDto;
 	}
